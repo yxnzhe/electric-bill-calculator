@@ -7,10 +7,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'electric-bill-calculator';
-
-  contentVisible = false;
-
-  showContent() {
-    this.contentVisible = true;
-  }
 }

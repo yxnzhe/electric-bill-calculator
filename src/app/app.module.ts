@@ -5,17 +5,21 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxBootstrapIconsModule } from 'ngx-bootstrap-icons';
+import { CalculatorComponent } from './calculator/calculator.component';
+import { HomepageComponent } from './homepage/homepage.component';
+import { FaqComponent } from './faq/faq.component';
 
 // Importing icons
 
 // End of importing icons
 
-const icons = {
-
-}
+const icons = { }
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CalculatorComponent,
+    HomepageComponent,
+    FaqComponent
   ],
   imports: [
     BrowserModule,
