@@ -7,6 +7,4 @@ const routes: Routes = [];
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { 
-  // add a route to /calculator
- }
+export class AppRoutingModule { }
