@@ -1,2 +1,110 @@
-<p>calculator works!</p>
-    
+<div class="calculator-form container">
+    <div class="illustration">
+        <img src="../../assets/svg/accounting.svg" alt="calculator illustration" class="calculatorIllu">
+    </div>
+    <form [formGroup]="calculatorForm" (ngSubmit)="onSubmit()">
+        <div class="card">
+            <div class="card-header">
+                <h3>Steps 1: Bill Information</h3>
+            </div>
+            <div class="card-body">
+                <div class="form-group p-3">
+                    <div class="bill-amount mb-3">
+                        <label for="billAmount">Bill Amount (RM)*</label>
+                        <input type="number" class="form-control" id="billAmount" formControlName="billAmount" placeholder="Bill amount (RM)" required>
+                    </div>
+                    <div class="total-usage mb-3">
+                        <label for="totalUsage">Total Usage (kWh)*</label>
+                        <input type="number" class="form-control" id="totalkWh" formControlName="totalkWh" placeholder="Total usage (kWh)" required>
+                    </div>
+                    <label for="fromDate">From</label>
+                    <div class="bill-date mb-3">
+                        <div class="date-column from-date">
+                          <input type="date" class="form-control" id="fromDate" formControlName="fromDate">
+                        </div>
+                        <label for="toDate">Until</label>
+                        <div class="date-column to-date">
+                          <input type="date" class="form-control" id="toDate" formControlName="toDate">
+                        </div>
+                    </div>                      
+                </div>
+            </div>
+        </div>
+
+        <div class="card mt-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h3 class="mb-0">Steps 2: Usage Information</h3>
+                <div class="add-user-button">
+                  <button type="button" class="btn btn-success" (click)="addUser()">Add User</button>
+                </div>
+            </div>              
+            <div class="card-body">
+                <div class="form-group p-3">
+                    <div formArrayName="userForm" *ngFor="let user of userForm.controls; let i = index">
+                        <div #userGroup [formGroupName]="i" class="user-form-group card p-3 mb-3">
+                            <div class="d-flex justify-content-between align-items-center card-header">
+                                <h4 class="mb-0">User {{ i + 1 }}</h4>
+                                <button type="button" class="btn btn-danger" (click)="removeUser(i)">Remove</button>
+                            </div>
+                            <div class="card-body">
+                                <div class="username mb-3">
+                                    <label for="name{{ i }}">Name*</label>
+                                    <input type="text" class="form-control" id="name{{ i }}" formControlName="name" placeholder="Name" required>
+                                </div>
+                                <div class="previous-reading mb-3">
+                                    <label for="previousReading{{ i }}">Previous Reading (kWh)*</label>
+                                    <input type="number" class="form-control" id="previousReading{{ i }}" formControlName="previousReading" placeholder="Previous reading" required>
+                                </div>
+                                <div class="current-reading">
+                                    <label for="currentReading{{ i }}">Current Reading (kWh)*</label>
+                                    <input type="number" class="form-control" id="currentReading{{ i }}" formControlName="currentReading" placeholder="Current reading" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>              
+            <div class="card-footer d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary">Calculate</button>
+            </div>                       
+        </div>
+        <div *ngIf="finalBillAmount" class="card mt-4">
+            <div class="card-header">
+                <h3 class="text-center">Final Bill</h3>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead class="table-active">
+                        <tr>
+                            <th colspan="5" class="text-center">Elec Tricks</th>
+                        </tr>
+                        <tr>
+                            <th colspan="4" class="text-center">From {{ finalBillAmount.fromDate }} Until {{ finalBillAmount.toDate }}</th>
+                            <th>Generated on: {{ currentDateTime }}</th>
+                        </tr>
+                        <tr>
+                            <th>Username</th>
+                            <th>Room Usage (kWh)</th>
+                            <th>Room Price (RM)</th>
+                            <th>Common Area Price (RM)</th>
+                            <th>Total Amount (RM)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let user of finalBillAmount.userForm; let i = index">
+                            <td>{{ user.name }}</td>
+                            <td>{{ user.totalUsage }} kWh</td>
+                            <td>RM {{ user.roomAmount }}</td>
+                            <td>RM {{ finalBillAmount.commonArea }}</td>
+                            <td>RM {{ user.totalAmount }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">&nbsp;</td>
+                            <td><strong>RM {{ finalBillAmount.finalBillPrice }}</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </form>
+</div>
