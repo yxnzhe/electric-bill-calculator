@@ -6,9 +6,12 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { FaqComponent } from './faq/faq.component';
 
 const routes: Routes = [
-  { path: '', component: HomepageComponent },
-  { path: 'calculator', component: CalculatorComponent },
-  { path: 'faq', component: FaqComponent }
+  { path: 'electric-bill-calculator',
+    children: [
+      { path: '', component: HomepageComponent },
+      { path: 'calculator', component: CalculatorComponent },
+      { path: 'faq', component: FaqComponent }
+  ]}
 ];
 
 @NgModule({
