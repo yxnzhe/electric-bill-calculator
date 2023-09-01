@@ -1,6 +1,6 @@
 <div class="calculator-form container">
     <div class="illustration">
-        <img src="../../assets/svg/accounting.svg" alt="calculator illustration" class="calculatorIllu">
+        <img [src]="assetPath('assets/svg/accounting.svg')" alt="calculator illustration" class="calculatorIllu">
     </div>
     <form [formGroup]="calculatorForm" (ngSubmit)="onSubmit()">
         <div class="card">

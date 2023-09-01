@@ -37,6 +37,10 @@ export class CalculatorComponent implements OnInit {
     }
   }
 
+  assetPath(path: string): string {
+    return `./${path}`;
+  }
+
   addUser() {
     const userForm = this.calculatorForm.get('userForm') as FormArray;
     userForm.push(this.createUserFormGroup());
