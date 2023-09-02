@@ -121,4 +121,8 @@ export class CalculatorComponent implements OnInit {
     
     this.finalBillAmount = calculatorForm.value;
   }
+
+  refreshPage() {
+    window.location.reload();
+  }
 }
