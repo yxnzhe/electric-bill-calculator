@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { NgxBootstrapIconsModule } from 'ngx-bootstrap-icons';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { NgToastModule } from 'ng-angular-popup'
 
 import { CalculatorComponent } from './calculator/calculator.component';
@@ -32,7 +33,8 @@ const icons = { }
     NgxBootstrapIconsModule.pick(icons),
     FormsModule,
     ReactiveFormsModule,
-    NgToastModule
+    NgToastModule,
+    BsDropdownModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -3,16 +3,16 @@
     color: white;
     display: flex;
     align-items: center;
-  }
-  .container-orange {
+}
+.container-orange {
     background-color: #FFD091;
     color: #202C39;
-  }
-  .container-white {
+}
+.container-white {
     background-color: whitesmoke;
     color: #202C39;
-  }
-  .content {
+}
+.content {
     padding: 100px 25%;
     display: flex;
     flex-direction: column;
@@ -20,42 +20,81 @@
     font-size: 1.2em;
     align-items: center;
     text-align: center;
-  }
-  .navbar-nav {
+}
+.navbar-nav {
     list-style: none;
     padding: 0;
     display: flex;
-  }
-  .nav-item {
+}
+.nav-item {
     display: flex;
     align-items: center;
     margin-right: 10px;
-    
+
     &:hover {
-      background-color: whitesmoke;
-      color: #202C39;
+        background-color: whitesmoke;
+        color: #202C39;
     }
-  }
-  .nav-link {
+}
+.nav-link {
     text-decoration: none;
-  }
-  .homepage-image {
+}
+.homepage-image {
     width: 100%;
     display: block;
-  }
-  .overlay {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+}
+.overlay-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    text-align: center;
     background-color: rgba(0, 0, 0, 0.65);
     color: white;
-    text-align: center;
-    padding: 2em 8em;
     border-radius: 5px;
-    
-    h1 {
-      font-size: 4em;
-      margin: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: opacity 0.3s;
+
+    .active {
+        opacity: 1;
     }
-  }
+
+    .overlay-content {
+        padding: 2em 1em;
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 0;
+        }
+        p {
+            font-size: 1.5em;
+        }
+        button {
+            font-size: 1.5em;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .container-white {
+      padding: 20px; /* Adjust padding for smaller screens */
+    }
+    
+    /* Reset margin for rows on smaller screens */
+    .row {
+      margin-bottom: 0;
+    }
+    
+    /* Adjust font size for smaller screens */
+    .content {
+      font-size: 0.9em;
+    }
+    
+    /* Add padding to overlay for smaller screens */
+    .overlay {
+      padding: 1em 2em;
+    }
+}
