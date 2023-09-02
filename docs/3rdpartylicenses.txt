@@ -46,6 +46,18 @@ ng-angular-popup
 ngx-bootstrap-icons
 MIT
 
+ngx-bootstrap/component-loader
+MIT
+
+ngx-bootstrap/dropdown
+MIT
+
+ngx-bootstrap/positioning
+MIT
+
+ngx-bootstrap/utils
+MIT
+
 rxjs
 Apache-2.0
                                Apache License
