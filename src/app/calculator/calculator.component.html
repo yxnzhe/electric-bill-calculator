@@ -65,8 +65,9 @@
                 </div>
             </div>              
             <div class="card-footer d-flex justify-content-center">
-                <button type="submit" class="btn btn-primary">Calculate</button>
-            </div>                       
+                <button class="btn btn-danger" (click)="refreshPage()">Reset</button>
+                <button type="submit" class="btn btn-primary ml-2">Calculate</button>
+            </div>                                
         </div>
         <div *ngIf="finalBillAmount" class="card mt-4">
             <div class="card-header">
