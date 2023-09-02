@@ -1,33 +1,61 @@
-<div class="container-white">
-    <div class="image-container">
-        <img src="assets/images/calculator.jpg" class="homepage-image img-fluid" alt="image" (load)="showContent()"/>
-        <div class="content overlay" [style.display]="contentVisible ? 'block' : 'none'">
-            <h1>Elec Tricks</h1>
-            <p>"Calculating Fair Electricity Shares for Unified Living."</p>
-            <button type="button" class="btn btn-primary">Get Started</button>
-        </div>
-    </div>
-</div>
-<div class="container-white content">
-    <div class="row">
-        <div class="col-sm-4">
-            <img src="assets/svg/calculator.svg" alt="calculator" width="50%" height="50%">
-            <h2>Accurate Calculations</h2>
-            <p>Effortlessly calculate electricity bills among tenants with precision, ensuring fairness and transparency</p>
-        </div>
-        <div class="col-sm-4">
-            <img src="assets/svg/users.svg" alt="users" width="50%" height="50%">
-            <h2>Unified Living</h2>
-            <p>Promote a sense of unity and collaboration among tenants by fairly distributing electricity costs based on usage.</p>
-        </div>
-        <div class="col-sm-4">
-            <img src="assets/svg/electricity.svg" alt="electricity" width="50%" height="50%">
-            <h2>Energy Efficiency</h2>
-            <p>Encourage responsible energy consumption through insightful data and analytics, helping reduce overall usage.</p>
-        </div>
-    </div>
-</div>
-<div class="container-orange content">
-    <h2>Mission and Values</h2>
-    <p>"Our mission is to simplify electricity billing while fostering unity and sustainability. We believe in transparency, collaboration, and empowering individuals to make informed energy choices."</p>
-</div>
+.container-dark {
+    background-color: #202C39;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+.container-orange {
+    background-color: #FFD091;
+    color: #202C39;
+}
+.container-white {
+    background-color: whitesmoke;
+    color: #202C39;
+}
+.content {
+    padding: 100px 25%;
+    display: flex;
+    flex-direction: column;
+    line-height: 2rem;
+    font-size: 1.2em;
+    align-items: center;
+    text-align: center;
+}
+.navbar-nav {
+    list-style: none;
+    padding: 0;
+    display: flex;
+}
+.nav-item {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+
+&:hover {
+    background-color: whitesmoke;
+    color: #202C39;
+}
+}
+.nav-link {
+    text-decoration: none;
+}
+.homepage-image {
+    width: 100%;
+    display: block;
+}
+.overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.65);
+    color: white;
+    text-align: center;
+    padding: 2em 8em;
+    border-radius: 5px;
+
+    h1 {
+        font-size: 4em;
+        margin: 0;
+    }
+}
