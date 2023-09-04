@@ -33,7 +33,7 @@ Steps 8: The total bill will be displayed on the screen.
 
 To request a feature, please follow these steps:
 
-Email us at yanzhe2003@gmail.com with the subject line "**Elec Tricks Feature Request**" This subject line will help us quickly identify your feature request.
+[Email us](mailto:yanzhe2003@gmail.com?subject=Elec%20Tricks%20Feature%20Request) with the subject line "**Elec Tricks Feature Request**" This subject line will help us quickly identify your feature request.
 
 In your email, provide a detailed description of the feature you'd like to see added to the app. Be sure to include the following information:
 
@@ -47,7 +47,7 @@ Send your email, and our team will promptly review your feature request. If we h
 
 To report a bug, please follow these steps:
 
-Email us at yanzhe2003@gmail.com with the subject line "**Elec Tricks Bugs**" This subject line will help us quickly identify your bug report.
+[Email us](mailto:yanzhe2003@gmail.com?subject=Elec%20Tricks%20Bugs) with the subject line "**Elec Tricks Bugs**" This subject line will help us quickly identify your bug report.
 
 In your email, provide a detailed description of the bug you've encountered. Be sure to include the following information:
 
