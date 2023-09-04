@@ -13,6 +13,7 @@ import { NgToastModule } from 'ng-angular-popup'
 import { CalculatorComponent } from './calculator/calculator.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { FaqComponent } from './faq/faq.component';
+import { TncComponent } from './tnc/tnc.component';
 
 // Importing icons
 
@@ -24,7 +25,8 @@ const icons = { }
     AppComponent,
     CalculatorComponent,
     HomepageComponent,
-    FaqComponent
+    FaqComponent,
+    TncComponent
   ],
   imports: [
     BrowserModule,
