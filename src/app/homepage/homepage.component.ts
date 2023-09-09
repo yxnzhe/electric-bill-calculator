@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 export class HomepageComponent {
   contentVisible = false;
 
-  showContent() {
-    this.contentVisible = true;
+  redirect() {
+    window.location.href = '/electric-bill-calculator/#/calculator';
   }
 }
