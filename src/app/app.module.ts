@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +15,7 @@ import { CalculatorComponent } from './calculator/calculator.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { FaqComponent } from './faq/faq.component';
 import { TncComponent } from './tnc/tnc.component';
+import { MplusComponent } from './mplus/mplus.component';
 
 // Importing icons
 
@@ -26,7 +28,8 @@ const icons = { }
     CalculatorComponent,
     HomepageComponent,
     FaqComponent,
-    TncComponent
+    TncComponent,
+    MplusComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +39,8 @@ const icons = { }
     FormsModule,
     ReactiveFormsModule,
     NgToastModule,
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

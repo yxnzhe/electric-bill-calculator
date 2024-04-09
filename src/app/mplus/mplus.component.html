@@ -1,0 +1,109 @@
+<div class="mplus-form container">
+    <div class="illustration">
+        <img [src]="assetPath('assets/svg/accounting.svg')" alt="calculator illustration" class="calculatorIllu">
+    </div>
+
+    <form [formGroup]="mplusForm" (ngSubmit)="onSubmit()">
+        <div class="card">
+            <div class="card-header">
+                <h3>Market Information</h3>
+            </div>
+            <div class="card-body">
+                <div class="form-group p-3">
+                    <div class="market-name mb-3">
+                        <label for="marketName">Market Name*</label>
+                        <select class="form-control" id="marketName" formControlName="marketName" (change)="getExchangeRate()" required>
+                            <option value="" disabled selected>Select market</option>
+                            <option *ngFor="let market of marketList" [value]="market.value">{{ market.name }}</option>
+                        </select>
+                    </div> 
+
+                    <div class="exchange-rate mb-3">
+                        <label for="exchangeRate">Exchange Rate</label>
+                        <input type="number" class="form-control" id="exchangeRate" formControlName="exchangeRate" step="0.01" placeholder="Exchange rate" required>
+                    </div>
+
+                    <div class="transaction mb-3">
+                        <label for="transaction">Transaction Type*</label>
+                        <select class="form-control" id="transaction" formControlName="transaction" required>
+                            <option value="" disabled selected>Select transaction type</option>
+                            <option *ngFor="let transaction of transactionList" [value]="transaction.value">{{ transaction.name }}</option>
+                        </select>
+                    </div>
+
+                    <div class="numbersOfShares mb-3">
+                        <label for="numbersOfShares">Number of Shares*</label>
+                        <input type="number" class="form-control" id="numbersOfShares" formControlName="numbersOfShares" min="1" step="1" placeholder="Number of shares" required>
+                    </div>
+
+                    <div class="stockPrice mb-3">
+                        <label for="pricePerUnit">Price per Unit*</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span *ngIf="mplusForm.get('marketName')?.value === 'MY'" class="input-group-text" id="inputGroupPrepend">MYR</span>
+                                <span *ngIf="mplusForm.get('marketName')?.value === 'HK'" class="input-group-text" id="inputGroupPrepend">HKD</span>
+                                <span *ngIf="mplusForm.get('marketName')?.value === 'US'" class="input-group-text" id="inputGroupPrepend">USD</span>
+                            </div>
+                            <input type="number" class="form-control" id="pricePerUnit" formControlName="pricePerUnit" min="1" step="0.01" placeholder="Stock price" required>
+                        </div>
+                    </div>
+
+                    <div *ngIf="mplusForm.get('marketName')?.value === 'MY'" class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="intraDayTrade" formControlName="intraDayTrade">
+                        <label class="form-check-label" for="intraDayTrade">Intraday Trade</label>
+                    </div>
+            
+                    <div class="card-footer d-flex justify-content-center">
+                        <button class="btn btn-danger" (click)="refreshPage()">Reset</button>
+                        <button type="submit" class="btn btn-primary ml-2">Calculate</button>
+                    </div> 
+                </div>
+            </div>
+        </div>
+        
+        <div class="card mt-4">
+            <div class="card-header">
+                <h3>Fees Breakdown</h3>
+            </div>
+            <div class="card-body">
+                <div class="fees-list">
+                    <table *ngFor="let item of feesList" class="table">
+                        <thead class="table-active">
+                            <tr>
+                                <th colspan="3" scope="col" class="text-center">{{ item.marketName }} Market</th>
+                            </tr>
+                            <tr>
+                                <th scope="col">Fees</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Rate</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Contract Value</td>
+                                <td>{{ item.currency }} {{ item.contractValue | number:'1.2-2' }}</td>
+                                <td>-</td>
+                            </tr>
+                            <tr *ngFor="let fees of item.feesBreakdown; let i = index">
+                                <td>{{ fees.name }}</td>
+                                <td>{{ item.currency }} {{ fees.value | number:'1.2-2' }}</td>
+                                <td>{{ fees.rate }}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3"></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Total Fees</strong></td>
+                                <td  colspan="2">{{ item.currency }} {{ item.totalFees | number:'1.2-2' }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Net Total</strong></td>
+                                <td  colspan="2">{{ item.currency }} {{ item.netTotal | number:'1.2-2' }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
