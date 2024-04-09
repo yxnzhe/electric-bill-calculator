@@ -26,6 +26,7 @@
     "popper.js": "^1.16.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.6.2",
+    "yahoo-finance": "^0.3.8",
     "zone.js": "~0.13.0"
   },
   "devDependencies": {
