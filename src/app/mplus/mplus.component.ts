@@ -53,9 +53,9 @@ export class MplusComponent {
       minBrokerageFee: 3,
       malaysiaContractStamp: 0.001,
       malaysiaStampDutyRate: "RM1.00 for every RM1,000.00 contract value, maximum RM 1000.00.",
-      regulatoryFee: 0.00008,
+      regulatoryFee: 0.0000278,
       minRegulatoryFee: 0.01,
-      regulatoryFeeRate: "USD 0.00008 per share (Sell only)",
+      regulatoryFeeRate: "0.00278% (Sell only) (Min USD 0.01)",
       tradingActivityFee: 0.000166,
       minTradingActivityFee: 0.01,
       maxTradingActivityFee: 8.30,
@@ -135,21 +135,39 @@ export class MplusComponent {
 
       const totalFees = brokerageFee + intraDayFee + clearingFee + stampDuty;
 
-      this.feesList = [
-        {
-          marketName: 'Malaysia (MY)',
-          currency: 'MYR',
-          contractValue: contractValue,
-          feesBreakdown: [
-            { name: 'Brokerage Fee', value: brokerageFee, rate: this.convertToPercentage(brokerageRate) },
-            { name: 'Intra Day Fee', value: intraDayFee, rate: this.convertToPercentage(malaysiaFees.intraDayFee) },
-            { name: 'Clearing Fee', value: clearingFee, rate: this.convertToPercentage(malaysiaFees.clearingFee) },
-            { name: 'Stamp Duty', value: stampDuty, rate: malaysiaFees.stampDutyRate }
-          ],
-          totalFees: totalFees,
-          netTotal: contractValue + totalFees
-        }
-      ]
+      if(stockInfo.transaction === 'Buy') {
+        this.feesList = [
+          {
+            marketName: 'Malaysia (MY)',
+            currency: 'MYR',
+            contractValue: contractValue,
+            feesBreakdown: [
+              { name: 'Brokerage Fee', value: brokerageFee, rate: this.convertToPercentage(brokerageRate) },
+              { name: 'Intra Day Fee', value: intraDayFee, rate: this.convertToPercentage(malaysiaFees.intraDayFee) },
+              { name: 'Clearing Fee', value: clearingFee, rate: this.convertToPercentage(malaysiaFees.clearingFee) },
+              { name: 'Stamp Duty', value: stampDuty, rate: malaysiaFees.stampDutyRate }
+            ],
+            totalFees: totalFees,
+            netTotal: contractValue + totalFees
+          }
+        ]
+      } else if(stockInfo.transaction === 'Sell') {
+        this.feesList = [
+          {
+            marketName: 'Malaysia (MY)',
+            currency: 'MYR',
+            contractValue: contractValue,
+            feesBreakdown: [
+              { name: 'Brokerage Fee', value: brokerageFee, rate: this.convertToPercentage(brokerageRate) },
+              { name: 'Intra Day Fee', value: intraDayFee, rate: this.convertToPercentage(malaysiaFees.intraDayFee) },
+              { name: 'Clearing Fee', value: clearingFee, rate: this.convertToPercentage(malaysiaFees.clearingFee) },
+              { name: 'Stamp Duty', value: stampDuty, rate: malaysiaFees.stampDutyRate }
+            ],
+            totalFees: totalFees,
+            netTotal: contractValue - totalFees
+          }
+        ]
+      }
     } else if (market === 'HK') {
       const hkFees = this.feesRate.hongKong;
 
@@ -168,24 +186,45 @@ export class MplusComponent {
 
       const totalFees = brokerageFee + tradingFee + settlementFee + sfcLevyFee + frcLevyFee + hkStampDuty + malaysiaStampDuty;
 
-      this.feesList = [
-        {
-          marketName: 'Hong Kong (HK)',
-          currency: 'HKD',
-          contractValue: contractValue,
-          feesBreakdown: [
-            { name: 'Brokerage Fee', value: brokerageFee, rate: this.convertToPercentage(hkFees.brokerageFee) },
-            { name: 'Trading Fee', value: tradingFee, rate: this.convertToPercentage(hkFees.tradingFee) },
-            { name: 'Settlement Fee', value: settlementFee, rate: this.convertToPercentage(hkFees.settlementFee) },
-            { name: 'SFC Levy Fee', value: sfcLevyFee, rate: this.convertToPercentage(hkFees.sfcLevyFee) },
-            { name: 'FRC Levy Fee', value: frcLevyFee, rate: this.convertToPercentage(hkFees.frcLevyFee) },
-            { name: 'HK Stamp Duty', value: hkStampDuty, rate: this.convertToPercentage(hkFees.hkStampDuty) },
-            { name: 'Malaysia Stamp Duty', value: malaysiaStampDuty, rate: hkFees.malaysiaStampDutyRate }
-          ],
-          totalFees: totalFees,
-          netTotal: contractValue + totalFees
-        }
-      ]
+      if(stockInfo.transaction === 'Buy') {
+        this.feesList = [
+          {
+            marketName: 'Hong Kong (HK)',
+            currency: 'HKD',
+            contractValue: contractValue,
+            feesBreakdown: [
+              { name: 'Brokerage Fee', value: brokerageFee, rate: this.convertToPercentage(hkFees.brokerageFee) },
+              { name: 'Trading Fee', value: tradingFee, rate: this.convertToPercentage(hkFees.tradingFee) },
+              { name: 'Settlement Fee', value: settlementFee, rate: this.convertToPercentage(hkFees.settlementFee) },
+              { name: 'SFC Levy Fee', value: sfcLevyFee, rate: this.convertToPercentage(hkFees.sfcLevyFee) },
+              { name: 'FRC Levy Fee', value: frcLevyFee, rate: this.convertToPercentage(hkFees.frcLevyFee) },
+              { name: 'HK Stamp Duty', value: hkStampDuty, rate: this.convertToPercentage(hkFees.hkStampDuty) },
+              { name: 'Malaysia Stamp Duty', value: malaysiaStampDuty, rate: hkFees.malaysiaStampDutyRate }
+            ],
+            totalFees: totalFees,
+            netTotal: contractValue + totalFees
+          }
+        ]
+      } else if(stockInfo.transaction === 'Sell') {
+        this.feesList = [
+          {
+            marketName: 'Hong Kong (HK)',
+            currency: 'HKD',
+            contractValue: contractValue,
+            feesBreakdown: [
+              { name: 'Brokerage Fee', value: brokerageFee, rate: this.convertToPercentage(hkFees.brokerageFee) },
+              { name: 'Trading Fee', value: tradingFee, rate: this.convertToPercentage(hkFees.tradingFee) },
+              { name: 'Settlement Fee', value: settlementFee, rate: this.convertToPercentage(hkFees.settlementFee) },
+              { name: 'SFC Levy Fee', value: sfcLevyFee, rate: this.convertToPercentage(hkFees.sfcLevyFee) },
+              { name: 'FRC Levy Fee', value: frcLevyFee, rate: this.convertToPercentage(hkFees.frcLevyFee) },
+              { name: 'HK Stamp Duty', value: hkStampDuty, rate: this.convertToPercentage(hkFees.hkStampDuty) },
+              { name: 'Malaysia Stamp Duty', value: malaysiaStampDuty, rate: hkFees.malaysiaStampDutyRate }
+            ],
+            totalFees: totalFees,
+            netTotal: contractValue - totalFees
+          }
+        ]
+      }
     } else if (market === 'US') {
       const usFees = this.feesRate.unitedStates;
 
@@ -221,23 +260,44 @@ export class MplusComponent {
 
       const totalFees = brokerageFee + regulatoryFee + tradingActivityFee + settlementFee + withholdingTax + malaysiaStampDuty;
 
-      this.feesList = [
-        {
-          marketName: 'United States (US)',
-          currency: 'USD',
-          contractValue: contractValue,
-          feesBreakdown: [
-            { name: 'Brokerage Fee', value: brokerageFee, rate: this.convertToPercentage(usFees.brokerageFee) },
-            { name: 'Regulatory Fee', value: regulatoryFee, rate: usFees.regulatoryFeeRate },
-            { name: 'Trading Activity Fee', value: tradingActivityFee, rate: usFees.tradingActivityRate },
-            { name: 'Settlement Fee', value: settlementFee, rate: usFees.settlementFeeRate },
-            { name: 'Withholding Tax', value: withholdingTax, rate: this.convertToPercentage(usFees.withholdingTax) },
-            { name: 'Malaysia Stamp Duty', value: malaysiaStampDuty, rate: usFees.malaysiaStampDutyRate }
-          ],
-          totalFees: totalFees,
-          netTotal: contractValue + totalFees
-        }
-      ]
+      if(stockInfo.transaction === 'Buy') {
+        this.feesList = [
+          {
+            marketName: 'United States (US)',
+            currency: 'USD',
+            contractValue: contractValue,
+            feesBreakdown: [
+              { name: 'Brokerage Fee', value: brokerageFee, rate: this.convertToPercentage(usFees.brokerageFee) },
+              { name: 'Regulatory Fee', value: regulatoryFee, rate: usFees.regulatoryFeeRate },
+              { name: 'Trading Activity Fee', value: tradingActivityFee, rate: usFees.tradingActivityRate },
+              { name: 'Settlement Fee', value: settlementFee, rate: usFees.settlementFeeRate },
+              { name: 'Withholding Tax', value: withholdingTax, rate: this.convertToPercentage(usFees.withholdingTax) },
+              { name: 'Malaysia Stamp Duty', value: malaysiaStampDuty, rate: usFees.malaysiaStampDutyRate }
+            ],
+            totalFees: totalFees,
+            netTotal: contractValue + totalFees
+          }
+        ]
+      } else if(stockInfo.transaction === 'Sell') {
+        this.feesList = [
+          {
+            marketName: 'United States (US)',
+            currency: 'USD',
+            contractValue: contractValue,
+            feesBreakdown: [
+              { name: 'Brokerage Fee', value: brokerageFee, rate: this.convertToPercentage(usFees.brokerageFee) },
+              { name: 'Regulatory Fee', value: regulatoryFee, rate: usFees.regulatoryFeeRate },
+              { name: 'Trading Activity Fee', value: tradingActivityFee, rate: usFees.tradingActivityRate },
+              { name: 'Settlement Fee', value: settlementFee, rate: usFees.settlementFeeRate },
+              { name: 'Withholding Tax', value: withholdingTax, rate: this.convertToPercentage(usFees.withholdingTax) },
+              { name: 'Malaysia Stamp Duty', value: malaysiaStampDuty, rate: usFees.malaysiaStampDutyRate }
+            ],
+            totalFees: totalFees,
+            netTotal: contractValue - totalFees
+          }
+        ]
+      }
+      
     }
 
     this.toastService.success({ detail: 'SUCCESS', summary: 'Fees calculated successfully' });
